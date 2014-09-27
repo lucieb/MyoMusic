@@ -1,0 +1,33 @@
+#N canvas 285 113 873 538 10;
+#X obj 27 59 unpackOSC;
+#X obj 27 33 udpreceive 12345;
+#X obj 26 223 routeOSC /roll /pitch /yaw;
+#X floatatom 26 247 5 0 0 0 - - -;
+#X floatatom 77 246 5 0 0 0 - - -;
+#X floatatom 128 248 5 0 0 0 - - -;
+#X obj 27 85 routeOSC /myo-music;
+#X obj 27 117 routeOSC /position /pose;
+#X floatatom 152 189 5 0 0 0 - - -;
+#X floatatom 208 189 5 0 0 0 - - -;
+#X obj 97 160 routeOSC /event /pinky /spread /fist /waveleft /waveleft
+;
+#X obj 97 188 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X floatatom 263 189 5 0 0 0 - - -;
+#X floatatom 319 189 5 0 0 0 - - -;
+#X floatatom 374 189 5 0 0 0 - - -;
+#X text 624 568 see also:;
+#X connect 0 0 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 2 1 4 0;
+#X connect 2 2 5 0;
+#X connect 6 0 7 0;
+#X connect 7 0 2 0;
+#X connect 7 1 10 0;
+#X connect 10 0 11 0;
+#X connect 10 1 8 0;
+#X connect 10 2 9 0;
+#X connect 10 3 12 0;
+#X connect 10 4 13 0;
+#X connect 10 5 14 0;
