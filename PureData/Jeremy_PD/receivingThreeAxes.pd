@@ -1,0 +1,88 @@
+#N canvas 399 139 1019 622 10;
+#X declare -lib mrpeach;
+#X obj 74 143 unpackOSC;
+#X obj 74 114 udpreceive 12345;
+#X obj 73 304 routeOSC /roll /pitch /yaw;
+#X floatatom 73 328 5 0 0 0 - - -;
+#X floatatom 124 327 5 0 0 0 - - -;
+#X floatatom 175 329 5 0 0 0 - - -;
+#X obj 74 166 routeOSC /myo-music;
+#X obj 74 198 routeOSC /position /pose;
+#X floatatom 199 270 5 0 0 0 - - -;
+#X floatatom 255 270 5 0 0 0 - - -;
+#X obj 144 240 routeOSC /event /pinky /spread /fist /waveleft /waveleft
+;
+#X obj 144 269 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 310 270 5 0 0 0 - - -;
+#X floatatom 366 270 5 0 0 0 - - -;
+#X floatatom 421 270 5 0 0 0 - - -;
+#X obj 78 84 import mrpeach;
+#X text 196 83;
+#X text 84 48 Receiving the data;
+#X text 257 322 based on a value from 0-100;
+#X obj 104 887 dac~;
+#X obj 216 553 metro 100;
+#X obj 245 506 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array array1 100 float 1;
+#A 0 0.0142584 0.00138819 -0.00980458 -0.0192452 -0.0268581 -0.0325801
+-0.0363704 -0.0381776 -0.0379947 -0.0357914 -0.0315831 -0.0253738 -0.0171915
+-0.00707701 0.00492895 0.0187509 0.0343344 0.0515783 0.0704 0.0906894
+0.112335 0.135217 0.159202 0.184161 0.209944 0.236409 -0.0594336 -0.0320676
+-0.00448518 0.0231549 0.0506934 0.0779737 0.104836 0.131129 0.156701
+0.181406 0.205104 0.227658 0.248948 0.268842 0.287244 0.30404 0.319148
+0.332483 0.343973 0.353569 0.361209 0.366877 0.370533 0.372183 0.371821
+0.369465 0.365147 0.358898 0.350784 0.340851 0.329193 0.315882 0.301022
+0.284718 0.267082 0.248243 0.228323 0.207469 0.185817 0.163521 0.140731
+0.117602 0.0942922 0.0709607 0.0477653 0.0248665 0.00241698 -0.0194266
+-0.0405168 -0.0607088 -0.0798603 -0.0978452 -0.114527 -0.129801 -0.143547
+-0.155674 -0.16609 -0.174715 -0.181489 -0.186343 -0.18925 -0.190161
+-0.189072 -0.185967 -0.180856 -0.173758 -0.164698 -0.153732 -0.140896
+-0.126275 -0.109933 -0.0919675 -0.0724738 -0.0515585;
+#X coords 0 1 99 -1 200 140 1;
+#X restore 328 509 graph;
+#X obj 202 825 tabwrite~ array1;
+#X obj 135 432 mtof;
+#X obj 147 483 osc~;
+#X floatatom 32 443 5 0 0 0 - - -;
+#X obj 33 743 pack 0 50;
+#X obj 37 784 line~;
+#X floatatom 67 709 5 0 0 0 - - -;
+#X text 47 658 Volume;
+#X obj 115 598 *~ 0.5;
+#X obj 119 824 *~;
+#X text 254 367;
+#X text 100 367;
+#X obj 183 382 / 100 * 127;
+#X obj 29 679 / 100;
+#X connect 0 0 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 2 1 4 0;
+#X connect 2 2 5 0;
+#X connect 4 0 36 0;
+#X connect 5 0 35 0;
+#X connect 6 0 7 0;
+#X connect 7 0 2 0;
+#X connect 7 1 10 0;
+#X connect 10 0 11 0;
+#X connect 10 1 8 0;
+#X connect 10 2 9 0;
+#X connect 10 3 12 0;
+#X connect 10 4 13 0;
+#X connect 10 5 14 0;
+#X connect 20 0 23 0;
+#X connect 21 0 20 0;
+#X connect 24 0 25 0;
+#X connect 24 0 26 0;
+#X connect 25 0 31 0;
+#X connect 27 0 28 0;
+#X connect 28 0 32 0;
+#X connect 31 0 32 1;
+#X connect 32 0 19 0;
+#X connect 32 0 23 0;
+#X connect 35 0 24 0;
+#X connect 36 0 27 0;
+#X connect 36 0 29 0;
