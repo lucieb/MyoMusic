@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3D084B38-0E92-4F59-812F-146809FB78DF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ofxMyo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>00D16701-75D6-45DA-81B9-CFC30877EAAF</key>
+		<string>https://github.com/lucieb/MyoMusic.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>openFrameworks/apps/WearHacks/ofxMyo/ofxMyo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>00D16701-75D6-45DA-81B9-CFC30877EAAF</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lucieb/MyoMusic.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>00D16701-75D6-45DA-81B9-CFC30877EAAF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>00D16701-75D6-45DA-81B9-CFC30877EAAF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MyoMusic</string>
+		</dict>
+	</array>
+</dict>
+</plist>

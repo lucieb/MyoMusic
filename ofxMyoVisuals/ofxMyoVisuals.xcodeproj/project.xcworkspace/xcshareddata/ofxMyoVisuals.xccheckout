@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6FD720C8-E20B-4D15-82BE-CB59519483AB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ofxMyoVisuals</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>00D16701-75D6-45DA-81B9-CFC30877EAAF</key>
+		<string>https://github.com/lucieb/MyoMusic.git</string>
+		<key>41E4927A-63F3-4ECE-A257-A5DF4AC620D0</key>
+		<string>https://github.com/openframeworks/openFrameworks.git</string>
+		<key>F9DC4439-7AD5-4E0C-906C-0339281C52A9</key>
+		<string>git://github.com/arturoc/ofxTween.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/MyoMusic/ofxMyoVisuals/ofxMyoVisuals.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>00D16701-75D6-45DA-81B9-CFC30877EAAF</key>
+		<string>../../..</string>
+		<key>41E4927A-63F3-4ECE-A257-A5DF4AC620D0</key>
+		<string>../../../../..</string>
+		<key>F9DC4439-7AD5-4E0C-906C-0339281C52A9</key>
+		<string>../../../../../addons/ofxTween</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lucieb/MyoMusic.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>41E4927A-63F3-4ECE-A257-A5DF4AC620D0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>00D16701-75D6-45DA-81B9-CFC30877EAAF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MyoMusic</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F9DC4439-7AD5-4E0C-906C-0339281C52A9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxTween</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>41E4927A-63F3-4ECE-A257-A5DF4AC620D0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>openFrameworks</string>
+		</dict>
+	</array>
+</dict>
+</plist>
