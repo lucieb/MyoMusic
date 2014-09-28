@@ -6,7 +6,7 @@
 -2 -8 1 10 -262144 -1 -1 17177 1;
 #X obj 244 189 hsl 180 15 2000 8000 0 0 empty \$0-cutoff_ctrl cutoff
 -2 -8 1 10 -262144 -1 -1 11038 1;
-#N canvas 317 334 847 508 plucked_instrument 1;
+#N canvas 315 339 847 508 plucked_instrument 0;
 #X obj 22 63 inlet;
 #X obj 92 60 inlet;
 #X obj 175 60 inlet;
