@@ -114,17 +114,44 @@ void ofApp::update(){
             
             quads[q]->pos.x = (-diff.x/20.0)*ofGetWidth()/3.0;
             quads[q]->pos.y = (-diff.y/20.0)*ofGetHeight()/3.0;
-            quads[q]->color.r = 255;
-            quads[q]->color.g = 255;
-            quads[q]->color.b = 255;
+            
+            if (activeQuad < quads.size()-1) {
+                // not video time!!!
+                quads[q]->color.r = 255;
+                quads[q]->color.g = 255;
+                quads[q]->color.b = 255;
+            } else {
+                int s = 255; int l = 200;
+                quads[q]->color.setHue(collector.pitch_w/20.0*255.0);
+                quads[q]->color.setSaturation(s);
+                quads[q]->color.setBrightness(l);
+                
+            }
             
             
             //ofxBlur.setScale(2.0);
             
         } else {
-            quads[q]->color.r = (int)(collector.pitch_w/20.0*125.0+75);
-            quads[q]->color.g = (int)(collector.roll_w/20.0*125.0+75);
-            quads[q]->color.b = (int)(collector.yaw_w/20.0*125.0+75);
+            
+            int min = 188/360.0*255.0;
+            int max = 310/360.0*255.0;
+            int s = 125; int l = 125;
+            
+            if (activeQuad == quads.size()-1) {
+                // video time!!!
+                quads[q]->color.setHue(collector.pitch_w/20.0*255.0);
+                quads[q]->color.setSaturation(s);
+                quads[q]->color.setBrightness(l);
+            }
+            else {
+                quads[q]->color.setHue(min);
+                quads[q]->color.setSaturation(collector.pitch_w/20.0*255.0-125);
+                quads[q]->color.setBrightness(collector.yaw_w/20.0*125.0+125);
+            }
+            
+            //quads[q]->color.r = (int)(collector.pitch_w/20.0*125.0+75);
+            //quads[q]->color.g = (int)(collector.roll_w/20.0*125.0+75);
+            //quads[q]->color.b = (int)(collector.yaw_w/20.0*125.0+75);
             
             quads[q]->pos.x = 0;
             quads[q]->pos.y = 0;
