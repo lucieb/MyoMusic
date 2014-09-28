@@ -98,7 +98,7 @@ void Quad::draw() {
         int tw;// = video.getWidth();
         int th;// = video.getHeight();
         
-        glColor4f(1., 1., 1., color.a/255.0);
+        glColor4f(color.r/255.0, color.g/255.0, color.b/255.0, color.a/255.0);
         
         if (videoIdx >= 0) {
             video.getTextureReference().bind();
@@ -235,12 +235,18 @@ bool Quad::animateLeft() {
     if (state == QuadCenter) {
         rotAxis.x = 0;
         playlist.addKeyFrame(Action::tween(1000.0f, &rot.y, 75.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.x, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.y, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.z, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
         playlist.addToKeyFrame(Action::tween(1000.0f, &scale, 0.5));
     }
     else if (state == QuadRight) {
         rotAxis.x = ofGetWidth();
         playlist.addKeyFrame(Action::pause(400.0f));
         playlist.addKeyFrame(Action::tween(1000.0f, &rot.y, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.x, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.y, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.z, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
         playlist.addToKeyFrame(Action::tween(1000.0f, &scale, 1.0));
     }
     
@@ -259,12 +265,18 @@ bool Quad::animateRight() {
     if (state == QuadCenter) {
         rotAxis.x = ofGetWidth();
         playlist.addKeyFrame(Action::tween(1000.0f, &rot.y, -75.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.x, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.y, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.z, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
         playlist.addToKeyFrame(Action::tween(1000.0f, &scale, 0.5));
     }
     else if (state == QuadLeft) {
         rotAxis.x = 0;
         playlist.addKeyFrame(Action::pause(400.0f));
         playlist.addKeyFrame(Action::tween(1000.0f, &rot.y, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.x, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.y, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
+        playlist.addToKeyFrame(Action::tween(1000.0f, &pos.z, 0.0f, TWEEN_QUAD, TWEEN_EASE_OUT));
         playlist.addToKeyFrame(Action::tween(1000.0f, &scale, 1.0));
     }
     

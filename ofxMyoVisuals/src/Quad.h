@@ -26,6 +26,9 @@ public:
     Quad();
     ~Quad();
     
+    ofColor color;
+    ofVec3f pos;
+    
     void setup();
     void update();
     void draw();
@@ -60,9 +63,7 @@ private:
     
     ofVec3f rot;
     ofVec3f rotAxis;
-    ofVec3f pos;
     float scale;
-    ofColor color;
 
     ofFbo   fbo;
     ofxPlaylist playlist;

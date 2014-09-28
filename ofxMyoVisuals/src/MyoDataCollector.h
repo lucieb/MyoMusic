@@ -28,6 +28,7 @@ public:
     
     // These values are set by onOrientationData() and onPose() above.
     int roll_w, pitch_w, yaw_w;
+    float roll_f, pitch_f, yaw_f;
     myo::Pose currentPose;
     myo::Pose lastPose;
     

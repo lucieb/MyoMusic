@@ -38,7 +38,7 @@ void ofApp::setup(){
 #endif
     
     fbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    ofxBlur.setup(ofGetWidth(), ofGetHeight(), 8, .2, 1);
+    ofxBlur.setup(ofGetWidth(), ofGetHeight(), 16, .2, 1);
     
     //
     // Visual stuff
@@ -74,7 +74,7 @@ void ofApp::update(){
     
 #ifdef USING_MYO
     hub->run(1000/20);
-    collector.print();
+    //collector.print();
     
     currentPose = collector.currentPose;
     if (currentPose != lastPose) {
@@ -91,6 +91,10 @@ void ofApp::update(){
         } else if (currentPose == myo::Pose::waveIn) {
             triggerLeft();
             myo->vibrate(myo::Myo::vibrationShort);
+        } else if (currentPose == myo::Pose::fist) {
+            sOrientation.x = collector.yaw_f;
+            sOrientation.y = collector.pitch_f;
+            sOrientation.z = 0;
         }
         
     }
@@ -99,6 +103,36 @@ void ofApp::update(){
 #endif
     
     for (int q=0 ; q<quads.size() ; q++) {
+#ifdef USING_MYO
+        
+        if (currentPose == myo::Pose::fist) {
+            
+            ofVec3f diff;
+            diff.x = collector.yaw_f - sOrientation.x;
+            diff.y = collector.pitch_f - sOrientation.y;
+            diff.z = 0;
+            
+            quads[q]->pos.x = (-diff.x/20.0)*ofGetWidth()/3.0;
+            quads[q]->pos.y = (-diff.y/20.0)*ofGetHeight()/3.0;
+            quads[q]->color.r = 255;
+            quads[q]->color.g = 255;
+            quads[q]->color.b = 255;
+            
+            
+            //ofxBlur.setScale(2.0);
+            
+        } else {
+            quads[q]->color.r = (int)(collector.pitch_w/20.0*125.0+75);
+            quads[q]->color.g = (int)(collector.roll_w/20.0*125.0+75);
+            quads[q]->color.b = (int)(collector.yaw_w/20.0*125.0+75);
+            
+            quads[q]->pos.x = 0;
+            quads[q]->pos.y = 0;
+            quads[q]->pos.z = 0;
+            
+            //ofxBlur.setScale(0.0);
+        }
+#endif
         quads[q]->update();
     }
     

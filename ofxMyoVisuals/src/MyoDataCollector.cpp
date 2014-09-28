@@ -50,9 +50,13 @@ MyoDataCollector::MyoDataCollector()
                           1.0f - 2.0f * (quat.y() * quat.y() + quat.z() * quat.z()));
         
         // Convert the floating point angles in radians to a scale from 0 to 20.
-        roll_w = static_cast<int>((roll + (float)M_PI)/(M_PI * 2.0f) * 18);
-        pitch_w = static_cast<int>((pitch + (float)M_PI/2.0f)/M_PI * 18);
-        yaw_w = static_cast<int>((yaw + (float)M_PI)/(M_PI * 2.0f) * 18);
+        roll_f = ((roll + (float)M_PI)/(M_PI * 2.0f) * 18);
+        pitch_f = ((pitch + (float)M_PI/2.0f)/M_PI * 18);
+        yaw_f = ((yaw + (float)M_PI)/(M_PI * 2.0f) * 18);
+        
+        roll_w = static_cast<int>(roll_f);
+        pitch_w = static_cast<int>(pitch_f);
+        yaw_w = static_cast<int>(yaw_f);
             }
     
     // onPose() is called whenever the Myo detects that the person wearing it has changed their pose, for example,

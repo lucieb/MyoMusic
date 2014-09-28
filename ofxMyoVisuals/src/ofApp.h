@@ -49,6 +49,8 @@ private:
     myo::Pose lastPose;
     int lastPitch;
     bool poseChanged;
+    ofVec3f sOrientation;
+    ofVec3f cOrientation;
 #endif
     
 		
