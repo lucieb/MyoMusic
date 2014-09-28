@@ -20,7 +20,8 @@ MyoDataCollector::MyoDataCollector()
 
     void MyoDataCollector::setup()
     {
-
+        sender = new ofxOscSender();
+        sender->setup(HOST, PORT);
     }
 
     // onUnpair() is called whenever the Myo is disconnected from Myo Connect by the user.
@@ -57,13 +58,214 @@ MyoDataCollector::MyoDataCollector()
         roll_w = static_cast<int>(roll_f);
         pitch_w = static_cast<int>(pitch_f);
         yaw_w = static_cast<int>(yaw_f);
-            }
+        {
+            ofxOscMessage m;
+            m.setAddress("/myo-music/position/roll");
+            m.addFloatArg(roll_w/18.0*100.0);
+            sender->sendMessage(m);
+        }
+        {
+            ofxOscMessage m;
+            m.setAddress("/myo-music/position/pitch");
+            m.addFloatArg(pitch_w/18.0*100.0);
+            sender->sendMessage(m);
+        }
+        {
+            ofxOscMessage m;
+            m.setAddress("/myo-music/position/yaw");
+            m.addFloatArg(yaw_w/18.0*100.0);
+            sender->sendMessage(m);
+        }
+    }
     
     // onPose() is called whenever the Myo detects that the person wearing it has changed their pose, for example,
     // making a fist, or not making a fist anymore.
     void MyoDataCollector::onPose(myo::Myo* myo, uint64_t timestamp, myo::Pose pose)
     {
         currentPose = pose;
+        
+        {
+            ofxOscMessage m;
+            m.setAddress("/myo-music/pose/new");
+            m.addStringArg("bang");
+            sender->sendMessage(m);
+        }
+        {
+            if (pose == myo::Pose::fist) {
+                
+                ofxOscMessage m;
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fist");
+                m.addIntArg(1);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fingersSpread");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveIn");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveOut");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/thumbToPinky");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+            } else if (pose == myo::Pose::fingersSpread) {
+                
+                ofxOscMessage m;
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fist");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fingersSpread");
+                m.addIntArg(1);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveIn");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveOut");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/thumbToPinky");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+            } else if (pose == myo::Pose::waveIn) {
+                
+                ofxOscMessage m;
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fist");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fingersSpread");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveIn");
+                m.addIntArg(1);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveOut");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/thumbToPinky");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+            } else if (pose == myo::Pose::waveOut) {
+                
+                ofxOscMessage m;
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fist");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fingersSpread");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveIn");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveOut");
+                m.addIntArg(1);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/thumbToPinky");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+            } else if (pose == myo::Pose::thumbToPinky) {
+                
+                ofxOscMessage m;
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fist");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fingersSpread");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveIn");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveOut");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/thumbToPinky");
+                m.addIntArg(1);
+                sender->sendMessage(m);
+                
+            } else {
+                
+                ofxOscMessage m;
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fist");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/fingersSpread");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveIn");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/waveOut");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+                
+                m.clear();
+                m.setAddress("/myo-music/pose/thumbToPinky");
+                m.addIntArg(0);
+                sender->sendMessage(m);
+            }
+        }
     }
 
     // onArmRecognized() is called whenever Myo has recognized a Sync Gesture after someone has put it on their

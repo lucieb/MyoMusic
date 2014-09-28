@@ -13,12 +13,18 @@
 #include <myo/myo.hpp>
 #include <ofMain.h>
 
+#define HOST "localhost"
+#define PORT 12345
+
+class ofxOscSender;
+
 // Classes that inherit from myo::DeviceListener can be used to receive events from Myo devices. DeviceListener
 // provides several virtual functions for handling different kinds of events. If you do not override an event, the
 // default behavior is to do nothing.
 class MyoDataCollector : public myo::DeviceListener {
     
 private:
+    ofxOscSender *sender;
     
 public:
     
