@@ -4,10 +4,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    ofSetFullscreen(false);
+    //ofSetFullscreen(true);
     ofSetWindowPosition(0,0);
-    ofSetWindowShape(1280,800);
-    //ofSetFullscreen(false);
+    ofSetWindowShape(1024,768);
+    ofSetFullscreen(true);
     
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofEnableDepthTest();
@@ -43,7 +43,7 @@ void ofApp::setup(){
     //
     // Visual stuff
     //
-    for (int q=0 ; q<7 ; q++) {
+    for (int q=0 ; q<9 ; q++) {
         quads.push_back(new Quad());
         quads[q]->setup();
         quads[q]->setImageIdx(q);
@@ -86,11 +86,15 @@ void ofApp::update(){
     if (poseChanged) {
         
         if (currentPose == myo::Pose::waveOut) {
-            triggerRight();
-            myo->vibrate(myo::Myo::vibrationShort);
+            if (activeQuad < quads.size()-1) {
+                triggerRight();
+                myo->vibrate(myo::Myo::vibrationShort);
+            }
         } else if (currentPose == myo::Pose::waveIn) {
-            triggerLeft();
-            myo->vibrate(myo::Myo::vibrationShort);
+            if (activeQuad < quads.size()-1) {
+                triggerLeft();
+                myo->vibrate(myo::Myo::vibrationShort);
+            }
         } else if (currentPose == myo::Pose::fist) {
             sOrientation.x = collector.yaw_f;
             sOrientation.y = collector.pitch_f;
@@ -113,7 +117,7 @@ void ofApp::update(){
             diff.z = 0;
             
             quads[q]->pos.x = (-diff.x/20.0)*ofGetWidth()/3.0;
-            quads[q]->pos.y = (-diff.y/20.0)*ofGetHeight()/3.0;
+            quads[q]->pos.y = (diff.y/20.0)*ofGetHeight()/3.0;
             
             if (activeQuad < quads.size()-1) {
                 // not video time!!!
@@ -122,7 +126,7 @@ void ofApp::update(){
                 quads[q]->color.b = 255;
             } else {
                 int s = 255; int l = 200;
-                quads[q]->color.setHue(collector.pitch_w/20.0*255.0);
+                quads[q]->color.setHue(collector.pitch_f/20.0*255.0);
                 quads[q]->color.setSaturation(s);
                 quads[q]->color.setBrightness(l);
                 
@@ -139,14 +143,14 @@ void ofApp::update(){
             
             if (activeQuad == quads.size()-1) {
                 // video time!!!
-                quads[q]->color.setHue(collector.pitch_w/20.0*255.0);
+                quads[q]->color.setHue(collector.yaw_f/20.0*255.0);
                 quads[q]->color.setSaturation(s);
                 quads[q]->color.setBrightness(l);
             }
             else {
                 quads[q]->color.setHue(min);
-                quads[q]->color.setSaturation(collector.pitch_w/20.0*255.0-125);
-                quads[q]->color.setBrightness(collector.yaw_w/20.0*125.0+125);
+                quads[q]->color.setSaturation(collector.yaw_f/20.0*255.0-125);
+                quads[q]->color.setBrightness(collector.pitch_w/20.0*125.0+125);
             }
             
             //quads[q]->color.r = (int)(collector.pitch_w/20.0*125.0+75);

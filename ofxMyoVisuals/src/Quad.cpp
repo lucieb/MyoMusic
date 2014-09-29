@@ -14,7 +14,7 @@ Quad::Quad() :
     scale(1.0), state(QuadCenter), animating(false),
     videoIdx(-1), imageIdx(0) {
     
-        for (int i=1 ; i<7 ; i++) {
+        for (int i=0 ; i<8 ; i++) {
             imageFilenames.push_back(ofToDataPath("presentation/Slide"+ofToString(i)+".jpg"));
         }
         

@@ -13,6 +13,7 @@
 #include <myo/myo.hpp>
 #include <ofMain.h>
 
+//#define HOST "224.0.0.1"
 #define HOST "localhost"
 #define PORT 12345
 
