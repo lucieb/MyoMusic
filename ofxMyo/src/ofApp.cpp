@@ -1,12 +1,10 @@
 #include "ofApp.h"
-#include "ofxOsc.h"
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    sender = new ofxOscSender();
-    sender->setup(HOST, PORT);
+    collector.setup();
     
     // First, we create a Hub with our application identifier. Be sure not to use the com.example namespace when
     // publishing your application. The Hub provides access to one or more Myos.
@@ -34,6 +32,8 @@ void ofApp::setup(){
     // Hub::addListener() takes the address of any object whose class inherits from DeviceListener, and will cause
     // Hub::run() to send events to all registered device listeners.
     hub->addListener(&collector);
+    
+    //ofAddListener(collector.onPoseChange,this,&ofApp::poseChanged);
 }
 
 //--------------------------------------------------------------
@@ -46,25 +46,11 @@ void ofApp::update(){
     // obtained from any events that have occurred.
     collector.print();
     
-    {
-        ofxOscMessage m;
-        m.setAddress("/myo-music/position/roll");
-        m.addFloatArg(collector.roll_w/18.0*100.0);
-        sender->sendMessage(m);
-    }
-    {
-        ofxOscMessage m;
-        m.setAddress("/myo-music/position/pitch");
-        m.addFloatArg(collector.pitch_w/18.0*100.0);
-        sender->sendMessage(m);
-    }
-    {
-        ofxOscMessage m;
-        m.setAddress("/myo-music/position/yaw");
-        m.addFloatArg(collector.yaw_w/18.0*100.0);
-        sender->sendMessage(m);
-    }
+    
 }
+
+void ofApp::poseChanged(MyoPoseEvent &event) {
+    }
 
 //--------------------------------------------------------------
 void ofApp::draw(){

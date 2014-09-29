@@ -11,13 +11,26 @@
 
 #include <iostream>
 #include <myo/myo.hpp>
+#include <ofMain.h>
+#include "MyoPoseEvent.h"
+
+#define HOST "224.0.0.1"
+#define PORT 12345
+
+class ofxOscSender;
 
 // Classes that inherit from myo::DeviceListener can be used to receive events from Myo devices. DeviceListener
 // provides several virtual functions for handling different kinds of events. If you do not override an event, the
 // default behavior is to do nothing.
 class MyoDataCollector : public myo::DeviceListener {
     
+private:
+    ofxOscSender *sender;
+    
 public:
+    
+    ofEvent<MyoPoseEvent> onPoseChange;
+    
     // These values are set by onArmRecognized() and onArmLost() above.
     bool onArm;
     myo::Arm whichArm;
@@ -26,6 +39,8 @@ public:
     int roll_w, pitch_w, yaw_w;
     myo::Pose currentPose;
     myo::Pose lastPose;
+    
+    void setup();
     
     MyoDataCollector();
     // onUnpair() is called whenever the Myo is disconnected from Myo Connect by the user.

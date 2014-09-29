@@ -3,11 +3,8 @@
 #include <myo/myo.hpp>
 #include "ofMain.h"
 #include "MyoDataCollector.h"
+#include "MyoPoseEvent.h"
 
-#define HOST "224.0.0.1"
-#define PORT 12345
-
-class ofxOscSender;
 
 class ofApp : public ofBaseApp{
 
@@ -31,6 +28,6 @@ private:
     MyoDataCollector collector;
     myo::Hub* hub;
     
-    ofxOscSender *sender;
+    void poseChanged(MyoPoseEvent &args);
 		
 };
