@@ -54,14 +54,7 @@ void ofApp::poseChanged(MyoPoseEvent &event) {
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    //collector.roll_w
     
-    ofSetColor((int)collector.roll_w/18.0*255.0,
-               (int)collector.pitch_w/18.0*255.0,
-               (int)collector.yaw_w/18.0*255.0);
-    //ofSetColor(255,125,125);
-    ofFill();
-    ofRect(0,0,1024,768);
 }
 
 //--------------------------------------------------------------

@@ -12,12 +12,28 @@
 #include <iostream>
 #include <myo/myo.hpp>
 #include <ofMain.h>
+#include "MyoPoseEvent.h"
 
-//#define HOST "224.0.0.1"
 #define HOST "localhost"
 #define PORT 12345
 
 class ofxOscSender;
+
+class MyoData {
+public:
+    // These values are set by onOrientationData() and onPose() above.
+    float roll = 0;
+    float pitch = 0;
+    float yaw = 0;
+    //int roll_w, pitch_w, yaw_w;
+    //float roll_f, pitch_f, yaw_f;
+    myo::Pose currentPose = myo::Pose::unknown;
+    myo::Pose lastPose = myo::Pose::unknown;
+    
+    // These values are set by onArmRecognized() and onArmLost() above.
+    bool onArm = false;
+    myo::Arm whichArm = myo::armUnknown;
+};
 
 // Classes that inherit from myo::DeviceListener can be used to receive events from Myo devices. DeviceListener
 // provides several virtual functions for handling different kinds of events. If you do not override an event, the
@@ -27,21 +43,26 @@ class MyoDataCollector : public myo::DeviceListener {
 private:
     ofxOscSender *sender;
     
+    // We store each Myo pointer that we pair with in this list, so that we can keep track of the order we've seen
+    // each Myo and give it a unique short identifier (see onPair() and identifyMyo() above).
+    std::vector<myo::Myo*> knownMyos;
+    std::map<myo::Myo*, MyoData> knownMyosData;
+    
 public:
     
-    // These values are set by onArmRecognized() and onArmLost() above.
-    bool onArm;
-    myo::Arm whichArm;
-    
-    // These values are set by onOrientationData() and onPose() above.
-    int roll_w, pitch_w, yaw_w;
-    float roll_f, pitch_f, yaw_f;
-    myo::Pose currentPose;
-    myo::Pose lastPose;
-    
     void setup();
+    void sendPose(myo::Myo* myo, int fist, int fingersSpread, int waveIn, int waveOut, int thumbToPinky);
+    void sendOrientation(myo::Myo* myo, float roll, float pitch, float yaw);
+    
+    myo::Myo* getMyo(int id);
+    MyoData* getMyoData(myo::Myo *myo);
     
     MyoDataCollector();
+    
+    size_t identifyMyo(myo::Myo* myo);
+    
+    // Every time Myo Connect successfully pairs with a Myo armband, this function will be called.
+    void onPair(myo::Myo* myo, uint64_t timestamp, myo::FirmwareVersion firmwareVersion);
     // onUnpair() is called whenever the Myo is disconnected from Myo Connect by the user.
     void onUnpair(myo::Myo* myo, uint64_t timestamp);
     // onOrientationData() is called whenever the Myo device provides its current orientation, which is represented

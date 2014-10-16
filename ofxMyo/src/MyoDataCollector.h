@@ -14,7 +14,7 @@
 #include <ofMain.h>
 #include "MyoPoseEvent.h"
 
-#define HOST "224.0.0.1"
+#define HOST "localhost"
 #define PORT 12345
 
 class ofxOscSender;
@@ -27,7 +27,12 @@ class MyoDataCollector : public myo::DeviceListener {
 private:
     ofxOscSender *sender;
     
+    // We store each Myo pointer that we pair with in this list, so that we can keep track of the order we've seen
+    // each Myo and give it a unique short identifier (see onPair() and identifyMyo() above).
+    std::vector<myo::Myo*> knownMyos;
+    
 public:
+    
     
     ofEvent<MyoPoseEvent> onPoseChange;
     
@@ -41,8 +46,15 @@ public:
     myo::Pose lastPose;
     
     void setup();
+    void sendPose(myo::Myo* myo, int fist, int fingersSpread, int waveIn, int waveOut, int thumbToPinky);
+    void sendOrientation(myo::Myo* myo, float roll, float pitch, float yaw);
     
     MyoDataCollector();
+    
+    size_t identifyMyo(myo::Myo* myo);
+    
+    // Every time Myo Connect successfully pairs with a Myo armband, this function will be called.
+    void onPair(myo::Myo* myo, uint64_t timestamp, myo::FirmwareVersion firmwareVersion);
     // onUnpair() is called whenever the Myo is disconnected from Myo Connect by the user.
     void onUnpair(myo::Myo* myo, uint64_t timestamp);
     // onOrientationData() is called whenever the Myo device provides its current orientation, which is represented

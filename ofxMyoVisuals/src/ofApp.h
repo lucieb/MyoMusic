@@ -42,7 +42,7 @@ private:
     int activeQuad;
     
 #ifdef USING_MYO
-    myo::Myo* myo;
+    //myo::Myo* myo;
     MyoDataCollector collector;
     myo::Hub* hub;
     myo::Pose currentPose;

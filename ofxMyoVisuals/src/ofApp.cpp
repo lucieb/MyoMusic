@@ -4,10 +4,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    //ofSetFullscreen(true);
-    ofSetWindowPosition(0,0);
-    ofSetWindowShape(1024,768);
     ofSetFullscreen(true);
+    ofSetWindowPosition(0,0);
+    ofSetWindowShape(1280,800);
     
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofEnableDepthTest();
@@ -27,8 +26,8 @@ void ofApp::setup(){
     hub = new myo::Hub("com.wearhacks.myo-music");
     
     std::cout << "Attempting to find a Myo..." << std::endl;
-    myo = hub->waitForMyo(10000);
-    if (!myo) {
+    myo::Myo *foundMyo = hub->waitForMyo(10000);
+    if (!foundMyo) {
         throw std::runtime_error("Unable to find a Myo!");
     }
     
@@ -76,7 +75,11 @@ void ofApp::update(){
     hub->run(1000/20);
     //collector.print();
     
-    currentPose = collector.currentPose;
+    myo::Myo *myo = collector.getMyo(0);
+    MyoData *data = collector.getMyoData(myo);
+    if (!data) return;
+    
+    currentPose = data->currentPose;
     if (currentPose != lastPose) {
         ofLog() << "New pose!";
         lastPose = currentPose;
@@ -96,8 +99,8 @@ void ofApp::update(){
                 myo->vibrate(myo::Myo::vibrationShort);
             }
         } else if (currentPose == myo::Pose::fist) {
-            sOrientation.x = collector.yaw_f;
-            sOrientation.y = collector.pitch_f;
+            sOrientation.x = data->yaw;
+            sOrientation.y = data->pitch;
             sOrientation.z = 0;
         }
         
@@ -112,12 +115,12 @@ void ofApp::update(){
         if (currentPose == myo::Pose::fist) {
             
             ofVec3f diff;
-            diff.x = collector.yaw_f - sOrientation.x;
-            diff.y = collector.pitch_f - sOrientation.y;
+            diff.x = data->yaw - sOrientation.x;
+            diff.y = data->pitch - sOrientation.y;
             diff.z = 0;
             
             quads[q]->pos.x = (-diff.x/20.0)*ofGetWidth()/3.0;
-            quads[q]->pos.y = (diff.y/20.0)*ofGetHeight()/3.0;
+            quads[q]->pos.y = (-diff.y/20.0)*ofGetHeight()/3.0;
             
             if (activeQuad < quads.size()-1) {
                 // not video time!!!
@@ -126,7 +129,7 @@ void ofApp::update(){
                 quads[q]->color.b = 255;
             } else {
                 int s = 255; int l = 200;
-                quads[q]->color.setHue(collector.pitch_f/20.0*255.0);
+                quads[q]->color.setHue(data->pitch/20.0*255.0);
                 quads[q]->color.setSaturation(s);
                 quads[q]->color.setBrightness(l);
                 
@@ -143,14 +146,14 @@ void ofApp::update(){
             
             if (activeQuad == quads.size()-1) {
                 // video time!!!
-                quads[q]->color.setHue(collector.yaw_f/20.0*255.0);
+                quads[q]->color.setHue(data->yaw/20.0*255.0);
                 quads[q]->color.setSaturation(s);
                 quads[q]->color.setBrightness(l);
             }
             else {
                 quads[q]->color.setHue(min);
-                quads[q]->color.setSaturation(collector.yaw_f/20.0*255.0-125);
-                quads[q]->color.setBrightness(collector.pitch_w/20.0*125.0+125);
+                quads[q]->color.setSaturation(data->yaw/20.0*255.0-125);
+                quads[q]->color.setBrightness(data->pitch/20.0*125.0+125);
             }
             
             //quads[q]->color.r = (int)(collector.pitch_w/20.0*125.0+75);
