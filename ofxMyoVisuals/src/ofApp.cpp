@@ -42,7 +42,7 @@ void ofApp::setup(){
     //
     // Visual stuff
     //
-    for (int q=0 ; q<9 ; q++) {
+    for (int q=0 ; q<8 ; q++) {
         quads.push_back(new Quad());
         quads[q]->setup();
         quads[q]->setImageIdx(q);
