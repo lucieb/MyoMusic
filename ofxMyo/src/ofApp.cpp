@@ -44,7 +44,7 @@ void ofApp::update(){
     hub->run(1000/20);
     // After processing events, we call the print() member function we defined above to print out the values we've
     // obtained from any events that have occurred.
-    collector.print();
+    //collector.print();
     
     
 }

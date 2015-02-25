@@ -9,7 +9,7 @@
 #include "Quad.h"
 
 Quad::Quad() :
-    color(165,105,180,125),
+    color(255,255,255,255),
     pos(0,0,0), rot(0,0,0), rotAxis(0,0,0),
     scale(1.0), state(QuadCenter), animating(false),
     videoIdx(-1), imageIdx(0) {

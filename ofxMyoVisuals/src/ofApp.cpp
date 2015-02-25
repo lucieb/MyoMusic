@@ -129,9 +129,9 @@ void ofApp::update(){
                 quads[q]->color.b = 255;
             } else {
                 int s = 255; int l = 200;
-                quads[q]->color.setHue(data->pitch/20.0*255.0);
-                quads[q]->color.setSaturation(s);
-                quads[q]->color.setBrightness(l);
+                //quads[q]->color.setHue(data->pitch/20.0*255.0);
+                //quads[q]->color.setSaturation(s);
+                //quads[q]->color.setBrightness(l);
                 
             }
             
@@ -146,14 +146,14 @@ void ofApp::update(){
             
             if (activeQuad == quads.size()-1) {
                 // video time!!!
-                quads[q]->color.setHue(data->yaw/20.0*255.0);
-                quads[q]->color.setSaturation(s);
-                quads[q]->color.setBrightness(l);
+                //quads[q]->color.setHue(data->yaw/20.0*255.0);
+                //quads[q]->color.setSaturation(s);
+                //quads[q]->color.setBrightness(l);
             }
             else {
-                quads[q]->color.setHue(min);
-                quads[q]->color.setSaturation(data->yaw/20.0*255.0-125);
-                quads[q]->color.setBrightness(data->pitch/20.0*125.0+125);
+                //quads[q]->color.setHue(min);
+                //quads[q]->color.setSaturation(data->yaw/20.0*255.0-125);
+                //quads[q]->color.setBrightness(data->pitch/20.0*125.0+125);
             }
             
             //quads[q]->color.r = (int)(collector.pitch_w/20.0*125.0+75);

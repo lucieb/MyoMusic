@@ -1,0 +1,68 @@
+#N canvas 41 210 907 472 10;
+#X obj 259 36 inlet;
+#X obj 92 275 outlet;
+#X obj 142 275 outlet;
+#X obj 190 274 outlet;
+#X obj 237 275 outlet;
+#X obj 286 276 outlet;
+#X obj 340 276 outlet;
+#X obj 154 211 unpack f f f f f f;
+#X obj 260 90 route 0 1 2 3;
+#X text 358 60 randomly choose one of four chords \, and output the
+midi pitches for each of the six strings.;
+#X text 425 286 strings: E A D G B E;
+#X text 421 298 midi notes: 40 \, 45 \, 50 \, 55 \, 59 \, 64;
+#X text 383 180 G#m;
+#X text 387 202 B;
+#X text 387 225 F#;
+#X text 386 243 E;
+#X msg 696 176 44 47 39 42 46 37;
+#X msg 160 351 40 45 52 57 61 64;
+#X msg 284 352 43 47 52 55 59 67;
+#X msg 39 350 40 47 52 55 59 64;
+#X msg 409 350 42 47 54 59 62 64;
+#X msg 695 201 47 39 42 45 37 40;
+#X msg 695 231 42 46 37 40 44 47;
+#X msg 699 257 40 44 47 38 42 45;
+#X text 420 315 http://computermusicresource.com/midikeys.html;
+#X text 422 178 G# \, B \, Eb;
+#X text 420 331 http://www.pianoworld.com/fun/vpc/piano_chords.htm
+;
+#X text 421 203 B \, Eb \, F#;
+#X msg 568 199 59 40 42;
+#X msg 212 135 59 40 42;
+#X text 428 228 F# \, A# \, C#;
+#X msg 568 229 42 46 37;
+#X msg 336 136 42 46 37;
+#X msg 569 174 44 47 39;
+#X msg 115 136 44 47 39;
+#X text 422 251 E \, G# \, B;
+#X msg 572 255 40 44 59;
+#X msg 461 134 40 44 59;
+#X obj 144 162 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 221 164 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 342 162 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 472 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X connect 0 0 8 0;
+#X connect 7 0 1 0;
+#X connect 7 1 2 0;
+#X connect 7 2 3 0;
+#X connect 7 3 4 0;
+#X connect 7 4 5 0;
+#X connect 7 5 6 0;
+#X connect 8 0 34 0;
+#X connect 8 1 29 0;
+#X connect 8 2 32 0;
+#X connect 8 3 37 0;
+#X connect 29 0 7 0;
+#X connect 29 0 39 0;
+#X connect 32 0 7 0;
+#X connect 32 0 40 0;
+#X connect 34 0 7 0;
+#X connect 34 0 38 0;
+#X connect 37 0 7 0;
+#X connect 37 0 41 0;

@@ -1,6 +1,6 @@
 #include <map>
 
-#include "/usr/local/include/RtMidi.h"
+#include <RtMidi.h>
 #include <myo/myo.hpp>
 
 class MyoData {
